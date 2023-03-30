@@ -1,0 +1,98 @@
+:root {
+  --color-bg-dark: #92b4ec;
+  --color-bg: #ffffff;
+  --color-grey: #d1d1d1;
+  --color-text: #22243b;
+  --color-accent: #ffd24c;
+  --color-white: white;
+  --color-scrollbar: #aaa7a7;
+  --color-todo: #ededed;
+  --color-icon: #b6ccf0;
+  --color-bg-primary: 146, 180, 236, 1;
+  --color-bg-secondary: 255, 210, 76, 1;
+}
+
+html.dark {
+  --color-bg-dark: #000000;
+  --color-bg: #282a3a;
+  --color-grey: #7c82a1;
+  --color-text: #fdfffd;
+  --color-accent: #c69749;
+  --color-todo: #404258;
+  --color-icon: #6b728e;
+  --color-bg-primary: 64, 66, 88, 1;
+  --color-bg-secondary: 107, 114, 142, 1;
+}
+
+/* CSS gradient site */
+/* box shadow generator */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  /* 체크박스 색상 변경 가능 */
+  accent-color: var(--color-accent);
+  background: linear-gradient(
+    151deg,
+    rgba(var(--color-bg-primary)) 0%,
+    rgba(var(--color-bg-secondary)) 100%
+  );
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  background-color: var(--color-bg-dark);
+  overflow: hidden;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 10px 4px rgba(0, 0, 0, 0.45);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+button {
+  outline: none;
+  border: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-grey);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-scrollbar);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent);
+}
