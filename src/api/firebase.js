@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { get, getDatabase, ref, set } from "firebase/database";
+import { get, getDatabase, ref, remove, set } from "firebase/database";
 import shortid from "shortid";
 
 const firebaseConfig = {
@@ -31,6 +31,11 @@ export async function addTodo(text, status) {
     status,
     id,
   });
+}
+
+// todo를 삭제하는 함수
+export async function removeTodo(id) {
+  return remove(ref(database, `todos/${id}`));
 }
 
 // mode를 가져오는 함수

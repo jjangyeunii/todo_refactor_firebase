@@ -2,28 +2,22 @@ import styles from "./Todo.module.css";
 import { BsPencilSquare } from "react-icons/bs";
 import { FaTrashAlt } from "react-icons/fa";
 import { useState } from "react";
-// import axios from "axios";
+import useTodoList from "../hooks/useTodoList";
 
-const Todo = ({
-  todo,
-  onSetStaus,
-  onDeleteTodo,
-  onUpdateTodo,
-  onCheckedTodo,
-}) => {
+const Todo = ({ todo, onSetStaus, onUpdateTodo, onCheckedTodo }) => {
   const { id, text, status } = todo;
   const [value, setValue] = useState("");
   const [isEditMode, setIsEditMode] = useState(false);
+  const { deleteTodo } = useTodoList();
 
   const handleChange = (e) => {
     const status = e.target.checked ? "completed" : "active";
     onSetStaus({ ...todo, status });
   };
   const handleDelete = () => {
-    // axios
-    //   .delete(`/todos/${id}`)
-    //   .then(() => onDeleteTodo(todo))
-    //   .catch((err) => console.log(err));
+    if (window.confirm("todo를 삭제하시겠습니까?")) {
+      deleteTodo.mutate(id);
+    }
   };
   const handleChangeUpdate = (e) => setValue(e.target.value);
   const handleUpdate = () => {
