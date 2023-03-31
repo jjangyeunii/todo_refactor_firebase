@@ -38,6 +38,11 @@ export async function removeTodo(id) {
   return remove(ref(database, `todos/${id}`));
 }
 
+// todo를 업데이트하는 함수
+export async function updateTodoStatus(id, todo) {
+  return set(ref(database, `todos/${id}`), todo);
+}
+
 // mode를 가져오는 함수
 export async function getMode() {
   return get(ref(database, "mode")) //

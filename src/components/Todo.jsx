@@ -4,11 +4,11 @@ import { FaTrashAlt } from "react-icons/fa";
 import { useState } from "react";
 import useTodoList from "../hooks/useTodoList";
 
-const Todo = ({ todo, onSetStaus, onUpdateTodo, onCheckedTodo }) => {
+const Todo = ({ todo, onSetStaus }) => {
   const { id, text, status } = todo;
   const [value, setValue] = useState("");
   const [isEditMode, setIsEditMode] = useState(false);
-  const { deleteTodo } = useTodoList();
+  const { deleteTodo, updateStatus } = useTodoList();
 
   const handleChange = (e) => {
     const status = e.target.checked ? "completed" : "active";
@@ -22,35 +22,14 @@ const Todo = ({ todo, onSetStaus, onUpdateTodo, onCheckedTodo }) => {
   const handleChangeUpdate = (e) => setValue(e.target.value);
   const handleUpdate = () => {
     setIsEditMode(!isEditMode);
-    // axios
-    //   .patch(`/todos/${id}`, {
-    //     text: value,
-    //   })
-    //   .then((res) => {
-    //     onUpdateTodo(res.data, res.data.text);
-    //     console.log(res.data.value);
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => console.log(err));
+    updateStatus.mutate({ id, todo: { ...todo, text: value } });
   };
   const handlecheck = (e) => {
-    // if (e.target.checked) {
-    //   axios
-    //     .patch(`/todos/${id}`, { status: "completed" })
-    //     .then((res) => {
-    //       onCheckedTodo(res.data, res.data.status);
-    //       console.log(res.data);
-    //     })
-    //     .catch((err) => console.log(err));
-    // } else {
-    //   axios
-    //     .patch(`/todos/${id}`, { status: "active" })
-    //     .then((res) => {
-    //       onCheckedTodo(res.data, res.data.status);
-    //       console.log(res.data);
-    //     })
-    //     .catch((err) => console.log(err));
-    // }
+    if (e.target.checked) {
+      updateStatus.mutate({ id, todo: { ...todo, status: "completed" } });
+    } else {
+      updateStatus.mutate({ id, todo: { ...todo, status: "active" } });
+    }
   };
 
   return (

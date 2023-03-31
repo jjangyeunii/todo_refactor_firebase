@@ -24,18 +24,6 @@ const TodoList = ({ currentTab }) => {
     setTodos(
       todos.map((todo) => (todo.id === setStatesTodo.id ? setStatesTodo : todo))
     );
-  const handleUpdateTodo = (updatedTodo, text) =>
-    setTodos(
-      todos.map((todo) =>
-        todo.id === updatedTodo.id ? { ...todo, text } : todo
-      )
-    );
-  const handleCheckedTodo = (checkedTodo, status) =>
-    setTodos(
-      todos.map((todo) =>
-        todo.id === checkedTodo.id ? { ...todo, status } : todo
-      )
-    );
   const filteredTodoList = getTabTodos(todos, currentTab);
 
   return (
@@ -55,13 +43,7 @@ const TodoList = ({ currentTab }) => {
           <h1>{moment(value).format("YYYY년 MM월 DD일")}</h1>
           {filteredTodoList &&
             filteredTodoList.map((todo) => (
-              <Todo
-                key={todo.id}
-                todo={todo}
-                onSetStaus={handleSetStatus}
-                onUpdateTodo={handleUpdateTodo}
-                onCheckedTodo={handleCheckedTodo}
-              />
+              <Todo key={todo.id} todo={todo} onSetStaus={handleSetStatus} />
             ))}
         </ul>
       )}

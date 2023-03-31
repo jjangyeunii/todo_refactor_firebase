@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addTodo, getTodoList, removeTodo } from "../api/firebase";
+import {
+  addTodo,
+  getTodoList,
+  removeTodo,
+  updateTodoStatus,
+} from "../api/firebase";
 
 export default function useTodoList() {
   const queryClient = useQueryClient();
@@ -15,5 +20,13 @@ export default function useTodoList() {
   const deleteTodo = useMutation((id) => removeTodo(id), {
     onSuccess: () => queryClient.invalidateQueries(["todos"]),
   });
-  return { TodoListQuery, addNewTodo, deleteTodo };
+
+  const updateStatus = useMutation(
+    ({ id, todo }) => updateTodoStatus(id, todo),
+    {
+      onSuccess: () => queryClient.invalidateQueries(["todos"]),
+    }
+  );
+
+  return { TodoListQuery, addNewTodo, deleteTodo, updateStatus };
 }
