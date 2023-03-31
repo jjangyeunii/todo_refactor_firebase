@@ -1,26 +1,19 @@
 import styles from "./MakeTodo.module.css";
-// import shortid from "shortid";
 import { useState } from "react";
-// import axios from "axios";
+import useTodoList from "../hooks/useTodoList";
 
 const MakeTodo = ({ onMakeTodo }) => {
+  const { addNewTodo } = useTodoList();
   const [value, setValue] = useState("");
-  const handleChange = (e) => setValue(e.target.value);
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (value.trim().length === 0) {
       return;
     }
-    // axios
-    //   .post("/todos", {
-    //     id: shortid.generate(),
-    //     text: value,
-    //     status: "active",
-    //   })
-    //   .then((res) => {
-    //     onMakeTodo(res.data);
-    //   })
-    //   .catch((err) => console.log(err));
+    addNewTodo.mutate({ text: value, state: "active" });
     setValue("");
   };
 

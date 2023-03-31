@@ -1,16 +1,24 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import useMode from "../hooks/useMode";
 // import axios from "axios";
 
 const DarkModeContext = createContext();
 
 export const DarkModeProvider = ({ children }) => {
+  const {
+    ModeQuery: { data: mode },
+  } = useMode();
   const [darkMode, setDarkMode] = useState(false);
+
   const clickDarkMode = () => {
     setDarkMode(!darkMode);
     updateDarkMode(!darkMode);
   };
 
   useEffect(() => {
+    const isDarkMode = mode && mode.type === "dark";
+    setDarkMode(isDarkMode);
+    updateDarkMode(isDarkMode);
     // axios
     //   .get("/mode")
     //   .then((res) => {

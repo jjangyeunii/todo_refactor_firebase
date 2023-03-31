@@ -7,7 +7,7 @@ import Calendar from "react-calendar";
 import "../App.css";
 import moment from "moment";
 import useTodoList from "../hooks/useTodoList";
-import useMode from "../hooks/useMode";
+// import useMode from "../hooks/useMode";
 
 const TodoList = ({ currentTab }) => {
   const [todos, setTodos] = useState([]);
@@ -15,21 +15,11 @@ const TodoList = ({ currentTab }) => {
   const {
     TodoListQuery: { isLoading, data: todolist },
   } = useTodoList();
-  const {
-    ModeQuery: { data: mode },
-  } = useMode();
 
   useEffect(() => {
-    // const todos = getTodoList();
-    !isLoading && console.log(todolist);
-    console.log(mode);
-    // axios
-    //   .get("/todos")
-    //   .then((res) => {
-    //     setTodos(res.data);
-    //   })
-    //   .catch((err) => console.log(err));
-  }, [todolist, mode]);
+    setTodos(todolist);
+    console.log(todolist);
+  }, [todolist]);
 
   const handleMakeTodo = (makedTodo) => setTodos([...todos, makedTodo]);
   const handleSetStatus = (setStatesTodo) =>
@@ -64,16 +54,17 @@ const TodoList = ({ currentTab }) => {
       </section>
       <ul className={styles.todos}>
         <h1>{moment(value).format("YYYY년 MM월 DD일")}</h1>
-        {filteredTodoList.map((todo) => (
-          <Todo
-            key={todo.id}
-            todo={todo}
-            onSetStaus={handleSetStatus}
-            onDeleteTodo={handleDeleteTodo}
-            onUpdateTodo={handleUpdateTodo}
-            onCheckedTodo={handleCheckedTodo}
-          />
-        ))}
+        {filteredTodoList &&
+          filteredTodoList.map((todo) => (
+            <Todo
+              key={todo.id}
+              todo={todo}
+              onSetStaus={handleSetStatus}
+              onDeleteTodo={handleDeleteTodo}
+              onUpdateTodo={handleUpdateTodo}
+              onCheckedTodo={handleCheckedTodo}
+            />
+          ))}
       </ul>
       <MakeTodo onMakeTodo={handleMakeTodo} />
     </section>

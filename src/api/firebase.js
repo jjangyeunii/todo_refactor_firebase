@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { get, getDatabase, ref } from "firebase/database";
+import { get, getDatabase, ref, set } from "firebase/database";
+import shortid from "shortid";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -20,6 +21,16 @@ export async function getTodoList() {
       }
       return [];
     });
+}
+
+// todo를 추가하는 함수
+export async function addTodo(text, status) {
+  const id = shortid.generate();
+  return set(ref(database, `todos/${id}`), {
+    text,
+    status,
+    id,
+  });
 }
 
 // mode를 가져오는 함수

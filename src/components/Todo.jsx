@@ -86,7 +86,6 @@ const Todo = ({
           <BsPencilSquare />
         </button>
       </span>
-
       <span className={styles.icon} onClick={handleDelete}>
         <button className={styles.button}>
           <FaTrashAlt />
