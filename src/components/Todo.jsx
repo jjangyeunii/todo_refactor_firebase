@@ -6,7 +6,7 @@ import useTodoList from "../hooks/useTodoList";
 
 const Todo = ({ todo, onSetStaus }) => {
   const { id, text, status } = todo;
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(text);
   const [isEditMode, setIsEditMode] = useState(false);
   const { deleteTodo, updateStatus } = useTodoList();
 
