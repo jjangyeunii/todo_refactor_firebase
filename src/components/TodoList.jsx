@@ -16,7 +16,6 @@ const TodoList = ({ currentTab }) => {
 
   useEffect(() => {
     setTodos(todolist);
-    console.log(todolist);
   }, [todolist]);
 
   const handleSetStatus = (setStatesTodo) =>

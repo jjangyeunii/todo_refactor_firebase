@@ -50,6 +50,14 @@ export async function getMode() {
       if (snapshot.exists()) {
         return Object.values(snapshot.val());
       }
-      return [{ type: "light" }];
+      return [{ id: "1", type: "light" }];
     });
+}
+
+// mode를 세팅함수
+export async function setMode(id, type) {
+  return set(ref(database, `mode/${id}`), {
+    id,
+    type,
+  });
 }
