@@ -2,7 +2,7 @@ import styles from "./MakeTodo.module.css";
 import { useState } from "react";
 import useTodoList from "../hooks/useTodoList";
 
-const MakeTodo = ({ onMakeTodo }) => {
+const MakeTodo = () => {
   const { addNewTodo } = useTodoList();
   const [value, setValue] = useState("");
   const handleChange = (e) => {

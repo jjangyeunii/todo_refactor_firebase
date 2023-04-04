@@ -19,7 +19,6 @@ const TodoList = ({ currentTab }) => {
     console.log(todolist);
   }, [todolist]);
 
-  const handleMakeTodo = (makedTodo) => setTodos([...todos, makedTodo]);
   const handleSetStatus = (setStatesTodo) =>
     setTodos(
       todos.map((todo) => (todo.id === setStatesTodo.id ? setStatesTodo : todo))
@@ -47,7 +46,7 @@ const TodoList = ({ currentTab }) => {
             ))}
         </ul>
       )}
-      <MakeTodo onMakeTodo={handleMakeTodo} />
+      <MakeTodo />
     </section>
   );
 };
